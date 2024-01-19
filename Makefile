@@ -1,15 +1,5 @@
 all: FizzBuzzC FizzBuzz.class FizzBuzz.exe FizzBuzzGo FizzBuzzHaskell FizzBuzzRust charlm.pt
-	time ./FizzBuzzC > /dev/null
-	time ./FizzBuzzGo > /dev/null
-	time ./FizzBuzzHaskell > /dev/null
-	time ./FizzBuzzRust > /dev/null
-	time java FizzBuzz > /dev/null
-	time python FizzBuzz.py > /dev/null
-	time mono FizzBuzz.exe > /dev/null
-	time node FizzBuzz.js > /dev/null
-	time clojure FizzBuzz.clj > /dev/null
-	time python infer_charlm.py cpu > /dev/null
-	time python infer_charlm.py mps > /dev/null
+	hyperfine --warmup 3 './FizzBuzzC' './FizzBuzzGo' './FizzBuzzHaskell' './FizzBuzzRust' 'java FizzBuzz' 'python FizzBuzz.py' 'mono FizzBuzz.exe' 'node FizzBuzz.js' 'clojure FizzBuzz.clj' 'python infer_charlm.py cpu' 'python infer_charlm.py mps'
 
 FizzBuzzC:
 	gcc -o FizzBuzzC FizzBuzz.c

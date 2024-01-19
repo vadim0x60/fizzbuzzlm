@@ -18,10 +18,11 @@ model = model.to(DEVICE)
 
 def sample(text):    
     offset = len(text)
-
+    intensor = torch.tensor([[alphabet.index(ch) for ch in text]]).to(DEVICE)
     while len(text) < SAMPLE_LEN:
-        intensor = torch.tensor([[alphabet.index(ch) for ch in text]]).to(DEVICE)
         outtensor = model(intensor)
+        pred = outtensor[0,-1].argmax()
+        intensor = torch.hstack([intensor, pred.reshape((1, 1))])
         text += alphabet[outtensor[0,-1].argmax()]
 
     return text[offset:]

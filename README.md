@@ -16,7 +16,7 @@ The goal is to reiterate, with a little more scientific rigor, the point made in
 
 ## Reproducibility
 
-Just run [`make`](https://www.gnu.org/software/make/manual/make.html) (but first make sure all the programming languages are installed and available in your `PATH`).
+Just run [`make`](https://www.gnu.org/software/make/manual/make.html) (but first make sure all the programming languages are installed, as well as Pytorch and `hyperfine`).
 
 ## Hire me
 
