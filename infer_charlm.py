@@ -1,27 +1,31 @@
 import torch
 import string
+import sys
+import numpy as np
 
-DEVICE = 'mps'
+DEVICE = sys.argv[1]
 SAMPLE_LEN = len('99 FizzBuzz ')
 
 alphabet = ' ' + string.digits + string.ascii_lowercase + string.ascii_uppercase
-
-model = torch.load('charllm.pt')
-embedding = torch.load('embedding.pt')
-
-model, embedding = [t.to(DEVICE) for t in [model, embedding]]
-
-def sample(context):
-    context = torch.tensor([[alphabet.index(ch) for ch in context]])
-    text = ''
+class OnlyOutputsPlease(torch.nn.Module):
+    def forward(self, x): # I can't believe I have to do this
+        outputs, (h, c) = x
+        return outputs
     
-    for _ in range(SAMPLE_LEN - len(context)):
-        output, _ = model(embedding(context.to(DEVICE)))
-        output = torch.argmax(output, dim=2)
-        text += alphabet[output[0,-1]]
 
-    return text
+model = torch.load('charlm.pt')
+model = model.to(DEVICE)
+
+def sample(text):    
+    offset = len(text)
+
+    while len(text) < SAMPLE_LEN:
+        intensor = torch.tensor([[alphabet.index(ch) for ch in text]]).to(DEVICE)
+        outtensor = model(intensor)
+        text += alphabet[outtensor[0,-1].argmax()]
+
+    return text[offset:]
 
 if __name__ == '__main__':
     for i in range(1, 100):
-        print(sample(str(i)))
+        print(sample(f'{i} '))
