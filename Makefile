@@ -1,7 +1,8 @@
-all: FizzBuzzC FizzBuzz.class FizzBuzz.exe FizzBuzzGo FizzBuzzHaskell charlm.pt
+all: FizzBuzzC FizzBuzz.class FizzBuzz.exe FizzBuzzGo FizzBuzzHaskell FizzBuzzRust charlm.pt
 	time ./FizzBuzzC > /dev/null
 	time ./FizzBuzzGo > /dev/null
 	time ./FizzBuzzHaskell > /dev/null
+	time ./FizzBuzzRust > /dev/null
 	time java FizzBuzz > /dev/null
 	time python FizzBuzz.py > /dev/null
 	time mono FizzBuzz.exe > /dev/null
@@ -20,5 +21,7 @@ FizzBuzzHaskell:
 	ghc FizzBuzz.hs -o FizzBuzzHaskell
 FizzBuzzGo:
 	go build -o FizzBuzzGo FizzBuzz.go 
+FizzBuzzRust:
+	rustc FizzBuzz.rs
 charlm.pt:
 	python train_charlm.py
