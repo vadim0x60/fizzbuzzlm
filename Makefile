@@ -22,6 +22,6 @@ FizzBuzzHaskell:
 FizzBuzzGo:
 	go build -o FizzBuzzGo FizzBuzz.go 
 FizzBuzzRust:
-	rustc FizzBuzz.rs
+	rustc -o FizzBuzzRust FizzBuzz.rs
 charlm.pt:
 	python train_charlm.py
