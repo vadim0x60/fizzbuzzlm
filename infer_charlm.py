@@ -2,19 +2,14 @@ import torch
 import string
 import sys
 import numpy as np
+from charlm import CharLSTM
 
 DEVICE = sys.argv[1]
 SAMPLE_LEN = len('99 FizzBuzz ')
 
 alphabet = ' ' + string.digits + string.ascii_lowercase + string.ascii_uppercase
-class OnlyOutputsPlease(torch.nn.Module):
-    def forward(self, x): # I can't believe I have to do this
-        outputs, (h, c) = x
-        return outputs
-    
 
-model = torch.load('charlm.pt')
-model = model.to(DEVICE)
+model = CharLSTM().to(DEVICE)
 
 def sample(text):    
     offset = len(text)

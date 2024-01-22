@@ -14,4 +14,4 @@ FizzBuzzGo:
 FizzBuzzRust:
 	rustc -o FizzBuzzRust FizzBuzz.rs
 charlm.pt:
-	python train_charlm.py
+	python train_charlm.py mps
